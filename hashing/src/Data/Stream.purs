@@ -6,7 +6,7 @@ import Data.String as String
 import Data.Monoid (class Monoid, mempty)
 import Data.Maybe (Maybe(..))
 
-class Stream stream element where
+class Stream stream element | stream -> element where
   uncons :: stream -> Maybe { head :: element, tail :: stream }
 
 instance streamArray :: Stream (Array a) a where
@@ -20,3 +20,5 @@ foldStream f list =
   case uncons list of
     Nothing -> mempty
     Just cons -> f cons.head <> foldStream f cons.tail
+
+genericTail xs = map _.tail (uncons xs)
