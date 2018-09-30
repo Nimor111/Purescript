@@ -15,13 +15,16 @@ type Address =
   , country :: String
   }
 
-type Entry = 
+type Entry =
   { firstName :: String
   , lastName :: String
   , address:: Address
   }
 
 type AddressBook = List Entry
+
+address :: String -> String -> String -> Address
+address street city country = { street, city, country }
 
 showEntry :: Entry -> String
 showEntry entry = entry.firstName <> ", " <>
@@ -48,7 +51,7 @@ query firstName lastName =
     filterEntry = \entry -> entry.firstName == firstName && entry.lastName == lastName
 
 queryByStreet :: String -> AddressBook -> Maybe Entry
-queryByStreet street = 
+queryByStreet street =
   head <<< filter filterByAddress where
     filterByAddress = \entry -> entry.address.street == street
 
