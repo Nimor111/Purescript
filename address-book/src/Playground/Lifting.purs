@@ -30,4 +30,3 @@ optionalSub = lift2 (-)
 combineMaybe :: forall a f. Applicative f => Maybe (f a) -> f (Maybe a)
 combineMaybe Nothing = pure Nothing
 combineMaybe (Just f) = Just <$> f
-
